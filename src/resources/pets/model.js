@@ -1,10 +1,10 @@
-const db = require("../../utils/database");
-const { buildAnimalDatabase } = require("../../utils/mockData");
+const db = require('../../utils/database');
+const { buildAnimalDatabase } = require('../../utils/mockData');
 
 function Pet() {
   function createTable() {
     const sql = `
-      DROP TABLE pets;
+      DROP TABLE IF EXISTS pets;
 
       CREATE TABLE IF NOT EXISTS pets (
         id        SERIAL        PRIMARY KEY,
@@ -17,7 +17,7 @@ function Pet() {
     `;
 
     db.query(sql)
-      .then((result) => console.log("[DB] Pet table ready."))
+      .then((result) => console.log('[DB] Pet table ready.'))
       .catch(console.error);
   }
 

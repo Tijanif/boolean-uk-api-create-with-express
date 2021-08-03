@@ -1,10 +1,10 @@
-const db = require("../../utils/database");
-const { buildBooksDatabase } = require("../../utils/mockData");
+const db = require('../../utils/database');
+const { buildBooksDatabase } = require('../../utils/mockData');
 
 function Book() {
   function createTable() {
     const sql = `
-      DROP TABLE books;
+      DROP TABLE IF EXISTS books;
       
       CREATE TABLE IF NOT EXISTS books (
         id              SERIAL        PRIMARY KEY,
@@ -17,7 +17,7 @@ function Book() {
     `;
 
     db.query(sql)
-      .then((result) => console.log("[DB] Book table ready."))
+      .then((result) => console.log('[DB] Book table ready.'))
       .catch(console.error);
   }
 
@@ -36,8 +36,23 @@ function Book() {
     });
   }
 
+  const findOneBook = (bookId, callback) => {
+    const sql = `
+    SELECT * FROM books 
+    WHERE id = ($1)
+    `;
+
+    db.query(sql, [bookId]).then((result) => {
+      callback(result.rows[0]);
+    });
+  };
+
   createTable();
   mockData();
+
+  return {
+    findOneBook,
+  };
 }
 
 module.exports = Book;
