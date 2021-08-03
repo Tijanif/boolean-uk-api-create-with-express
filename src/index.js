@@ -5,6 +5,7 @@ const db = require('./utils/database');
 // const Book = require('./resources/books/model');
 // const Pet = require('./resources/pets/model');
 const booksRouter = require('./resources/books/router');
+const petsRouter = require('./resources/pets/router');
 
 /* IMPORT ROUTERS */
 
@@ -17,6 +18,7 @@ app.use(express.json());
 
 /* SETUP ROUTES */
 app.use('/books', booksRouter);
+app.use('/pets', petsRouter);
 /* CATCH-ALL TO TEST ROUTES */
 
 app.get('*', (req, res) => {

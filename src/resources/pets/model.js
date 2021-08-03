@@ -36,8 +36,20 @@ function Pet() {
     });
   }
 
+  const findAllPets = (callback) => {
+    const sql = `
+    SELECT * from pets;
+    `;
+    db.query(sql).then((result) => {
+      callback(result.rows);
+    });
+  };
   createTable();
   mockData();
+
+  return {
+    findAllPets,
+  };
 }
 
 module.exports = Pet;
