@@ -2,7 +2,7 @@
 
 const Pet = require('./model');
 
-const { findAllPets, findOnePet } = Pet();
+const { findAllPets, findOnePet, createAPet } = Pet();
 
 const findAll = (req, res) => {
   findAllPets((pets) => {
@@ -18,7 +18,16 @@ const findOne = (req, res) => {
   });
 };
 
+const creatOne = (req, res) => {
+  const newPet = req.body;
+
+  createAPet(newPet, (createdPet) => {
+    res.json({ Pet: createdPet });
+  });
+};
+
 module.exports = {
   findAll,
   findOne,
+  creatOne,
 };

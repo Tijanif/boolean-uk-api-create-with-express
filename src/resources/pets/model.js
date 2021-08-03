@@ -55,12 +55,27 @@ function Pet() {
       calback(result.rows[0]);
     });
   };
+
+  const createAPet = (newPet, calback) => {
+    const { name, age, type, breed, microchip } = newPet;
+
+    const sql = `
+    INSERT INTO pets (name, age, type, breed, microchip)
+    VALUES ($1, $2, $3, $4, $5)
+    RETURNING *;
+    `;
+
+    db.query(sql, [name, age, type, breed, microchip]).then((result) => {
+      calback(result.rows[0]);
+    });
+  };
   createTable();
   mockData();
 
   return {
     findAllPets,
     findOnePet,
+    createAPet,
   };
 }
 
