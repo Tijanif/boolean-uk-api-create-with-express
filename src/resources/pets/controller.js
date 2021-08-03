@@ -1,4 +1,5 @@
 // No need to import the Pet model just the db
+const { validationResult } = require('express-validator');
 
 const Pet = require('./model');
 
@@ -20,6 +21,12 @@ const findOne = (req, res) => {
 
 const creatOne = (req, res) => {
   const newPet = req.body;
+  // newPet('age').Number();
+
+  // const errors = validationResult(req);
+  // if (!errors.isEmpty()) {
+  //   return res.status(400).json({ errors: errors.array() });
+  // }
 
   createAPet(newPet, (createdPet) => {
     res.json({ Pet: createdPet });

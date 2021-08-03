@@ -1,5 +1,6 @@
 const express = require('express');
 const morgan = require('morgan');
+const expressValidator = require('express-validator');
 
 const db = require('./utils/database');
 // const Book = require('./resources/books/model');
@@ -15,6 +16,7 @@ const app = express();
 
 app.use(morgan('dev'));
 app.use(express.json());
+// app.use(expressValidator());
 
 /* SETUP ROUTES */
 app.use('/books', booksRouter);
