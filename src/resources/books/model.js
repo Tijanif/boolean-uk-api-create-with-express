@@ -56,7 +56,21 @@ function Book() {
     });
   };
 
-  const createAbook = () => {};
+  const createAbook = (newbook, callback) => {
+    const { title, type, author, topic, publicationdate } = newbook;
+
+    const sql = `
+    INSERT INTO books (title, type, author, topic, publicationdate)
+    VALUES ($1, $2, $3, $4, $5)
+    RETURNING *;
+    `;
+
+    db.query(sql, [title, type, author, topic, publicationdate]).then(
+      (result) => {
+        callback(result.rows[0]);
+      }
+    );
+  };
 
   createTable();
   mockData();
@@ -64,6 +78,7 @@ function Book() {
   return {
     findAllBooks,
     findOneBook,
+    createAbook,
   };
 }
 
