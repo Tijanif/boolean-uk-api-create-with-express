@@ -44,11 +44,23 @@ function Pet() {
       callback(result.rows);
     });
   };
+
+  const findOnePet = (petId, calback) => {
+    const sql = `
+    SELECT * FROM pets
+    WHERE id = ($1);
+    `;
+
+    db.query(sql, [petId]).then((result) => {
+      calback(result.rows[0]);
+    });
+  };
   createTable();
   mockData();
 
   return {
     findAllPets,
+    findOnePet,
   };
 }
 
