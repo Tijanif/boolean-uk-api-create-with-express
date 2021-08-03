@@ -2,10 +2,12 @@
 
 const Book = require('./model');
 
-const { findOneBook } = Book();
+const { findAllBooks, findOneBook } = Book();
 
 function findAll(req, res) {
-  res.json({ Books: 'All the books in the world' });
+  findAllBooks((books) => {
+    res.json({ books });
+  });
 }
 
 const findOne = (req, res) => {
@@ -17,6 +19,6 @@ const findOne = (req, res) => {
 };
 
 module.exports = {
-  findOne,
   findAll,
+  findOne,
 };

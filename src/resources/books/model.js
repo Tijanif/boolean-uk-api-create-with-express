@@ -36,6 +36,15 @@ function Book() {
     });
   }
 
+  const findAllBooks = (callback) => {
+    const sql = `
+      SELECT * FROM books 
+      `;
+
+    db.query(sql).then((result) => {
+      callback(result.rows);
+    });
+  };
   const findOneBook = (bookId, callback) => {
     const sql = `
     SELECT * FROM books 
@@ -47,10 +56,13 @@ function Book() {
     });
   };
 
+  const createAbook = () => {};
+
   createTable();
   mockData();
 
   return {
+    findAllBooks,
     findOneBook,
   };
 }
