@@ -5,7 +5,7 @@ const Book = require('./model');
 const { findOneBook } = Book();
 
 function findAll(req, res) {
-  res.json({ products: 'More than you can buy!' });
+  res.json({ Books: 'All the books in the world' });
 }
 
 const findOne = (req, res) => {
