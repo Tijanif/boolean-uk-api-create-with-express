@@ -2,8 +2,8 @@ const express = require('express');
 const morgan = require('morgan');
 
 const db = require('./utils/database');
-const Book = require('./resources/books/model');
-const Pet = require('./resources/pets/model');
+// const Book = require('./resources/books/model');
+// const Pet = require('./resources/pets/model');
 const booksRouter = require('./resources/books/router');
 
 /* IMPORT ROUTERS */
@@ -34,8 +34,8 @@ app.listen(port, () => {
     } else {
       console.log('\n[DB] Connected...\n');
 
-      Book();
-      Pet();
+      // Book();
+      // Pet();
     }
   });
 
